@@ -8,12 +8,9 @@ const FooterComponent = () => {
                 <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2 overflow-hidden">
                     <div className="flex flex-wrap flex-row lg:justify-between -mx-3">
                         <div className="flex-shrink max-w-full w-full md:w-1/4 lg:w-2/5 px-3 lg:pr-16">
-                            <div className="flex  mb-2">
-                                {/* <img src="/src/img/logo.png" className="w-1/4 h-auto object-cover" alt="LOGO"/> */}
-                                <span className="text-3xl leading-normal mb-2 font-bold text-gray-100 mt-2">Corporate Link Africa</span>
+                            <div className="flex w-full justify-start -ml-30 items-start  mb-2">
+                                <img src="/images/logo.webp" className="w-full h-30 overflow-hidden object-contain" />
                             </div>
-
-                            <p>Simplified Bussines Narratives.</p>
 
                             <ul className="flex space-x-8 mt-6 mb-6 Lg:mb-0">
                                 {/*facebook*/}
@@ -49,12 +46,12 @@ const FooterComponent = () => {
                                 <div className="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
                                     <h4 className="text-base leading-normal mb-3 uppercase text-gray-100">Services</h4>
                                     <ul>
-                                        <li className="py-1 hover:text-white"><a href="/services">Advertising</a></li>
-                                        <li className="py-1 hover:text-white"><a href="/services">Corporate News Coverage</a></li>
-                                        <li className="py-1 hover:text-white"><a href="/services">Content Development</a></li>
-                                        <li className="py-1 hover:text-white"><a href="/services">Graphics Design</a></li>
-                                        <li className="py-1 hover:text-white"><a href="/services">Public Relations</a></li>
-                                        <li className="py-1 hover:text-white"><a href="/services">Documentaries</a></li>
+                                        <li className="py-1 hover:text-white"><a href="/services">Renting</a></li>
+                                        <li className="py-1 hover:text-white"><a href="/services">Real Estate</a></li>
+                                        <li className="py-1 hover:text-white"><a href="/services">Mortage</a></li>
+                                        <li className="py-1 hover:text-white"><a href="/services">Land scape design</a></li>
+                                        <li className="py-1 hover:text-white"><a href="/services">House design</a></li>
+                                        <li className="py-1 hover:text-white"><a href="/services">Consultations</a></li>
                                     </ul>
                                 </div>
 
@@ -76,7 +73,7 @@ const FooterComponent = () => {
                                         <li className="py-1 hover:text-white">
                                             <a href="#" className="flex space-x-4">
                                                 <BsEnvelope size={20} color={'#fff'} />
-                                                <p>info@clafrica.online</p>
+                                                <p>info@arnoldhomes.online</p>
                                             </a>
                                         </li>
 
@@ -113,7 +110,7 @@ const FooterComponent = () => {
                 <div className="container py-4 border-t border-gray-200 border-opacity-10">
                     <div className="row">
                         <div className="col-12 col-md text-center">
-                            <p className="d-block my-3">Copyright © Corporate Link Africa | All rights reserved.</p>
+                            <p className="d-block my-3">Copyright © Arnold Homes | All rights reserved.</p>
                         </div>
                     </div>
                 </div>

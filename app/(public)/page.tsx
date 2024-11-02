@@ -27,7 +27,7 @@ export default function Home() {
                   </svg>
                   <div className="mt-3 sm:mt-5">
                     <h3 className="text-lg sm:text-3xl font-semibold text-white">2,000+</h3>
-                    <p className="mt-1 text-sm sm:text-base text-neutral-400">Preline partners</p>
+                    <p className="mt-1 text-sm sm:text-base text-neutral-400">Arnold Homes partners</p>
                   </div>
                 </div>
                 {/* End Stats*/}
@@ -57,7 +57,7 @@ export default function Home() {
                   </svg>
                   <div className="mt-3 sm:mt-5">
                     <h3 className="text-lg sm:text-3xl font-semibold text-white">$55M+</h3>
-                    <p className="mt-1 text-sm sm:text-base text-neutral-400">Ads managed yearly</p>
+                    <p className="mt-1 text-sm sm:text-base text-neutral-400">Mortage managed yearly</p>
                   </div>
                 </div>
                 {/* End Stats*/}
@@ -74,7 +74,7 @@ export default function Home() {
           {/* Title*/}
           <div className="max-w-3xl mb-10 lg:mb-14">
             <h2 className="text-white font-semibold text-2xl md:text-4xl md:leading-tight">Our approach</h2>
-            <p className="mt-1 text-neutral-400">This profound insight guides our comprehensive strategy — from meticulous research and strategic planning to the seamless execution of brand development and website or product deployment.</p>
+            <p className="mt-1 text-neutral-400">This profound insight guides our comprehensive strategy — from meticulous research and strategic planning to the seamless execution of house development and mortage management.</p>
           </div>
           {/* End Title*/}
 

@@ -25,8 +25,8 @@ const Header = () => {
                 <nav className="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-6 mx-auto">
                     <div className="md:col-span-3">
                         {/* Logo */}
-                        <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="../../templates/creative-agency/index.html" aria-label="Preline">
-                            <img src="/images/logo.webp" />
+                        <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="/" aria-label="Preline">
+                            <img src="/images/logo.webp" className="w-full h-12 max-h-15 overflow-hidden object-cover" />
                         </a>
                         {/* End Logo */}
                     </div>
