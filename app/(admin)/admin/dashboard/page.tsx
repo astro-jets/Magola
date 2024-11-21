@@ -1,16 +1,20 @@
 "use client"
+import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import ChartOne from "@/components/Charts/ChartOne";
 import ChartThree from "@/components/Charts/ChartThree";
-import { useSession } from "next-auth/react";
-import { BsFolderFill, BsPeople, BsPersonStanding } from "react-icons/bs";
+import { BiDollar } from "react-icons/bi";
+// import { useSession } from "next-auth/react";
+import { BsFolderFill, BsHouses, BsPeople, BsPersonStanding, BsPiggyBank } from "react-icons/bs";
 import { FaFolderPlus, FaRegFolderOpen, FaSearchengin } from "react-icons/fa";
 
 const DashboardAdmin = () => {
-    const { data: session, status } = useSession();
-    if (!session?.user) { return }
+
     return (
         <>
-            <div className=" flex-1 ml-[20%] self-end overflow-hidden max-w-[80%] p-6 md:mt-16">
+            <div className=" self-end overflow-hidden w-full p-6 md:mt-16">
+                <Breadcrumb
+                    pageName="dashboard"
+                />
                 {/* General Report */}
                 <div className="grid grid-cols-3 gap-6">
 
@@ -18,11 +22,11 @@ const DashboardAdmin = () => {
                         <div className="card">
                             <div className="card-body flex flex-col">
                                 <div className="flex flex-row justify-between items-center">
-                                    <FaFolderPlus color="#00757e" size={50} />
-                                    <h1 className="text-3xl">4</h1>
+                                    <BsHouses color="#00757e" size={50} />
+                                    <h1 className="text-3xl">420</h1>
                                 </div>
                                 <div className="mt-8">
-                                    <p>New Cases</p>
+                                    <p>Properties</p>
                                 </div>
 
                             </div>
@@ -33,11 +37,11 @@ const DashboardAdmin = () => {
                         <div className="card">
                             <div className="card-body flex flex-col">
                                 <div className="flex flex-row justify-between items-center">
-                                    <BsFolderFill color="#ff9900" size={50} />
+                                    <BiDollar color="#ff9900" size={50} />
                                     <h1 className="text-3xl">22</h1>
                                 </div>
                                 <div className="mt-8">
-                                    <p>Pending Cases</p>
+                                    <p>Purchases</p>
                                 </div>
 
                             </div>
@@ -48,11 +52,11 @@ const DashboardAdmin = () => {
                         <div className="card">
                             <div className="card-body flex flex-col">
                                 <div className="flex flex-row justify-between items-center">
-                                    <FaSearchengin color="#2d5740" size={50} />
-                                    <h1 className="text-3xl">11</h1>
+                                    <BsPeople color="#2d5740" size={50} />
+                                    <h1 className="text-3xl">848</h1>
                                 </div>
                                 <div className="mt-8">
-                                    <p>Active Cases</p>
+                                    <p>Customers</p>
                                 </div>
 
                             </div>
@@ -61,78 +65,8 @@ const DashboardAdmin = () => {
                     </div>
                 </div>
                 {/* End General Report */}
+
                 {/* strat Analytics */}
-                <div className="mt-6 grid grid-cols-2 gap-6 ">
-                    {/* update section */}
-                    <div className="card bg-teal-400 border-teal-400 rounded-3xl shadow-md text-white">
-                        <div className="card-body flex flex-row">
-
-                            {/* image */}
-                            <div className="img-wrapper w-40 h-40 flex justify-center items-center">
-                                <img src="/images/happy.svg" alt="img title" />
-                            </div>
-                            {/* end image */}
-
-                            {/* info */}
-                            <div className="py-2 ml-10">
-                                <h1 className="h6">Welcome Back, {session.user.name}</h1>
-                                <p className="text-white text-xs">You've contributed to solving 8 cases this week.</p>
-
-                                <ul className="mt-4">
-                                    <li className="text-sm font-light"><i className="fad fa-check-double mr-2 mb-2"></i> Finish Dashboard Design</li>
-                                    <li className="text-sm font-light"><i className="fad fa-check-double mr-2 mb-2"></i> Fix Issue #74</li>
-                                    <li className="text-sm font-light"><i className="fad fa-check-double mr-2"></i> Publish version 1.0.6</li>
-                                </ul>
-                            </div>
-                            {/* end info */}
-
-                        </div>
-                    </div>
-                    {/* end update section */}
-
-                    {/* carts */}
-                    <div className="flex flex-col">
-                        {/* charts */}
-                        <div className="grid grid-cols-2 gap-6 h-full">
-
-                            <div className="card">
-                                <div className="py-3 px-4 flex flex-row justify-between">
-                                    <h1 className="h6 ">
-                                        <span className="num-4">200</span>
-                                        <p>Users</p>
-                                    </h1>
-
-                                    <div className="bg-teal-400 text-teal-700 border-teal-300 border w-10 h-10 rounded-full flex justify-center items-center">
-                                        <BsPeople size={30} color="#fff" />
-                                    </div>
-                                </div>
-                                <div className="analytics_1"></div>
-                            </div>
-
-                            <div className="card">
-                                <div className="py-3 px-4 flex flex-row justify-between">
-                                    <h1 className="h6">
-                                        <span className="num-2">10</span>
-                                        <p>Adminstrators</p>
-                                    </h1>
-
-                                    <div className="bg-indigo-200 text-indigo-700 border-indigo-300 border w-10 h-10 rounded-full flex justify-center items-center">
-                                        <BsPersonStanding size={30} color="#fff" />
-                                    </div>
-                                </div>
-                                <div className="analytics_1"></div>
-                            </div>
-
-                        </div>
-                        {/* charts    */}
-
-                    </div>
-                    {/* end charts */}
-
-
-                </div>
-                {/* end Analytics */}
-
                 <div className="w-full flex justify-between mt-6 py-6">
                     <div className="w-[68%]">
                         <ChartOne />
@@ -141,6 +75,7 @@ const DashboardAdmin = () => {
                         <ChartThree />
                     </div>
                 </div>
+                {/* end Analytics */}
 
                 {/* start quick Info */}
                 <div className="grid grid-cols-2 gap-6 mt-6 ">

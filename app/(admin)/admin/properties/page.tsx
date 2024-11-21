@@ -1,21 +1,26 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import NewProperty from "@/components/NewProperty/page";
 
 const DashboardAdmin = () => {
     return (
         <>
-            <div className="bg-gray-100 ml-[20%] flex-1 p-6 md:mt-16  w-10rem">
-                <Breadcrumb pageName="Cases" />
+            <div className="bg-gray-100 w-full flex-1 p-6 md:mt-16  w-10rem">
+                <Breadcrumb pageName="Properties" />
+                <div className="py-8">
+                    <NewProperty />
+                </div>
                 <div className=" mt-6 ">
                     <div className="card col-span-2 xl:col-span-1">
-                        <div className="card-header">Recent Sales</div>
+                        <div className="card-header">Recent Properties</div>
 
                         <table className="table-auto w-full text-left">
                             <thead>
                                 <tr>
                                     <th className="px-4 py-2 border-r"></th>
-                                    <th className="px-4 py-2 border-r">product</th>
-                                    <th className="px-4 py-2 border-r">price</th>
-                                    <th className="px-4 py-2">date</th>
+                                    <th className="px-4 py-2 border-r">Name</th>
+                                    <th className="px-4 py-2 border-r">Price</th>
+                                    <th className="px-4 py-2">Created on</th>
+                                    <th className="px-4 py-2">Details</th>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-600">
