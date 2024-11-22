@@ -60,15 +60,17 @@ const NewProperty = () => {
         setFormData({ ...formData, tags: formData.tags });
         // console.log("Form Data => ", formData)
         const data = new FormData();
-        // data.append('file', file);
+        data.append('file', file);
         data.append('name', formData.name);
         data.append('cost', formData.price);
-        data.append('categories', formData.tags.toLocaleString());
+        data.append('categories', JSON.stringify(formData.tags));
+
 
         setLoading(true)
         const res = await fetch(`http://localhost:3000/api/property/new`, {
             method: "POST",
             body: data,
+            next: { revalidate: 0 }
         });
         console.log("Res => ", res)
         const result = await res.json();
