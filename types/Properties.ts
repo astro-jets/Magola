@@ -3,7 +3,7 @@ import { userProps } from "@/types/user";
 export type PropertyProps = {
   _id?: string;
   name: string;
-  price: string;
+  cost: string;
   createdAt?: string;
   updatedAt?: string;
   path: string;

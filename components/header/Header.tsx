@@ -1,24 +1,33 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Player from "../player/Player";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-const pages = ["home", "services", "about", "contacts"];
+const pages = ["home", "properties", "about", "contacts"];
 
 const Header = () => {
-    const [showMenu, setShowMenu] = useState(false);
-    const [activePage, setActivePage] = useState('home');
+    const pathname = usePathname();
     const router = useRouter();
 
-    const routeTo = (page: string) => {
-        setActivePage(page);
-        if (page == 'home') { router.push('/') }
-        else { router.push(`/${page}`) }
-    }
+    const getActivePage = () => {
+        if (pathname === "/") return "home";
+        const matchingPage = pages.find(page => pathname.startsWith(`/${page}`));
+        return matchingPage || ""; // Return empty string if no match is found
+    };
 
+    const [activePage, setActivePage] = useState(getActivePage());
+
+    useEffect(() => {
+        setActivePage(getActivePage());
+    }, [pathname]); // Re-run whenever the pathname changes
+
+    const routeTo = (page: string) => {
+        if (page === "home") router.push("/");
+        else router.push(`/${page}`);
+    };
     return (
         <>
             <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7">
@@ -60,10 +69,11 @@ const Header = () => {
                     <div id="hs-navbar-hcail" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block md:w-auto md:basis-auto md:order-2 md:col-span-6" aria-labelledby="hs-navbar-hcail-collapse">
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
                             {
-                                pages.map(page => (
-                                    <div className="cursor-pointer">
+                                pages.map((page, index) => (
+                                    <div key={index} className="cursor-pointer">
                                         <p
-                                            className={`relative inline-block text-black focus:outline-none before:absolute before:bottom-0.5 dark:text-white ${page == activePage ? `before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400` : ``}`}
+                                            className={`relative inline-block text-black focus:outline-none before:absolute before:bottom-0.5 dark:text-white 
+                                                ${page == activePage ? `before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400` : ``}`}
                                             onClick={() => { routeTo(page) }}
                                         >{
                                                 page.toLocaleUpperCase()}

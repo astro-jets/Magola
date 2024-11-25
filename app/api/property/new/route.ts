@@ -13,14 +13,16 @@ export async function POST(req: Request) {
     const file = data.get("file") as unknown as File;
     const cost = data.get("cost") as string | null;
     const name = data.get("name") as string | null;
+    const details = data.get("details") as string | null;
     const categories = data.get("categories") as string | null; // tags array sent as JSON string
 
     // Validate required fields
-    if (!file || !cost || !name || !categories) {
+    if (!file || !cost || !name || !categories || !details) {
       return NextResponse.json(
         {
           status: false,
-          message: "All fields are required (file, cost, name, categories).",
+          message:
+            "All fields are required (file, cost, name, details, categories).",
         },
         { status: 400 }
       );
@@ -53,6 +55,7 @@ export async function POST(req: Request) {
     const newProperty = new Property({
       name,
       cost,
+      details,
       path: `/uploads/${file.name}`, // Save relative path to public folder
       tags,
     });

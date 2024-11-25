@@ -1,13 +1,13 @@
-// models/Maintenance.ts
+// models/Claim.ts
 import mongoose from "mongoose";
 import { Schema, model } from "mongoose";
 
-const MaintenanceSchema = new Schema(
+const ClaimSchema = new Schema(
   {
     user: {
       type: String,
     },
-    asset: {
+    purchase: {
       type: String,
     },
     message: {
@@ -21,7 +21,6 @@ const MaintenanceSchema = new Schema(
   { timestamps: true }
 );
 
-const Maintenance =
-  mongoose.models.Maintenance || model("Maintenance", MaintenanceSchema);
+const Claim = mongoose.models.Claim || model("Claim", ClaimSchema);
 
-export default Maintenance;
+export default Claim;

@@ -1,5 +1,5 @@
 import ContactsComponent from "@/components/Contacts/Contacts";
-import Services from "@/components/Services/Services";
+import Services from "@/components/Properties/Properties";
 import Slider from "@/components/slider/Slider";
 
 export default function Home() {

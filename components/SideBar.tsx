@@ -1,62 +1,87 @@
-"use client"
+"use client";
 
-import { getURL } from "next/dist/shared/lib/utils";
-import Link from "next/link";
-import { BsHouse, BsPieChart, BsPiggyBank } from "react-icons/bs";
+import { usePathname } from "next/navigation";
+import { BsBell, BsDoorOpen, BsHouses, BsPieChart, BsPiggyBank } from "react-icons/bs";
+import { FaHands } from "react-icons/fa";
+import { FaScaleUnbalanced } from "react-icons/fa6";
 import { GrDashboard } from "react-icons/gr";
+
 type linksType = {
     name: string;
     url: string;
-    logo: JSX.Element
-}[]
+    logo: JSX.Element;
+}[];
 
 const links: linksType = [
     {
-        name: 'Dashboard',
-        url: '/admin/dashboard',
-        logo: <GrDashboard size={20} color="gray" />
+        name: "Dashboard",
+        url: "/admin/dashboard",
+        logo: <GrDashboard size={20} color="gray" />,
     },
     {
-        name: 'Properties',
-        url: '/admin/properties',
-        logo: <BsHouse size={20} color="gray" />
+        name: "Properties",
+        url: "/admin/properties",
+        logo: <BsHouses size={20} color="gray" />,
     },
     {
-        name: 'Purchases',
-        url: '/admin/purchases',
-        logo: <BsPiggyBank size={20} color="gray" />
+        name: "Purchases",
+        url: "/admin/purchases",
+        logo: <BsPiggyBank size={20} color="gray" />,
     },
     {
-        name: 'Reports',
-        url: '/admin/reports',
-        logo: <BsPieChart size={20} color="gray" />
-    }
-]
+        name: "Notifications",
+        url: "/admin/notifications",
+        logo: <BsBell size={20} color="gray" />,
+    },
+    {
+        name: "Claims",
+        url: "/admin/claims",
+        logo: <FaHands size={20} color="gray" />,
+    },
+    {
+        name: "Lease",
+        url: "/admin/lease",
+        logo: <FaScaleUnbalanced size={20} color="gray" />,
+    },
+    {
+        name: "Reports",
+        url: "/admin/reports",
+        logo: <BsPieChart size={20} color="gray" />,
+    },
+    {
+        name: "Log Out",
+        url: "/logout",
+        logo: <BsDoorOpen size={20} color="gray" />,
+    },
+];
+
 const SideBar = () => {
-    const url = getURL();
+    const pathname = usePathname();
+
+    // Helper to determine if a link is active
+    const isActive = (linkUrl: string) => pathname.startsWith(linkUrl);
+
     return (
         <div className="h-full w-[20%] border-r pt-10 px-5 hidden md:block">
-            <p className="text-lg font-bold mb-10  text-teal-600">Arnold Homes</p>
+            <p className="text-lg font-bold mb-10 text-teal-600">Arnold Homes</p>
 
-            {
-                links.map(link => (
-                    url === link.url ?
-                        <a href={link.url} className="mt-4 p-2 bg-blue-200 rounded-lg text-sm font-medium text-slate-500 hover:text-blue-500 group cursor-pointer flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 stroke-orange-400 mr-4 group-hover:stroke-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                {link.logo}
-                            </svg>
-                            {link.name}
-                        </a> :
-                        <a href={link.url} className="mt-4 py-1.5 text-sm font-medium text-slate-500 hover:text-blue-500 group cursor-pointer flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 stroke-slate-400 mr-4 group-hover:stroke-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                {link.logo}
-                            </svg>
-                            {link.name}
-                        </a>
-                ))
-            }
+            {links.map((link) => (
+                <a
+                    key={link.url}
+                    href={link.url}
+                    className={`mt-8 p-2 rounded-lg text-sm font-medium group cursor-pointer flex items-center ${isActive(link.url)
+                        ? "bg-blue-200 text-slate-500 hover:text-blue-500"
+                        : "text-slate-500 hover:text-blue-500"
+                        }`}
+                >
+                    <span className={`h-5 mr-4 group-hover:stroke-blue-500 ${isActive(link.url) ? "stroke-orange-400" : "stroke-slate-400"}`}>
+                        {link.logo}
+                    </span>
+                    {link.name}
+                </a>
+            ))}
         </div>
     );
-}
+};
 
 export default SideBar;

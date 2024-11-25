@@ -1,22 +1,15 @@
 "use client"
-
-
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loader from "../common/Loader";
 import SucessModal from "@/components/modals/SuccessModal";
 import ErrorModal from "@/components/modals/ErrorModal";
 import { useRouter } from "next/navigation";
 
 import { BsPlus, BsX } from "react-icons/bs";
-import { PropertyProps } from "@/types/Properties";
-import CheckboxTwo from "../Checkboxes/CheckboxTwo";
-import CheckboxFour from "../Checkboxes/CheckboxFour";
-import CheckboxThree from "../Checkboxes/CheckboxThree";
-import CheckboxFive from "../Checkboxes/CheckboxFive";
+import { PropertyProps } from "@/types/Properties";;
 
 const initialProperty: PropertyProps = {
-    name: '', price: '', path: '', details: '', tags: []
+    name: '', cost: '', path: '', details: '', tags: []
 }
 const NewProperty = () => {
     const [file, setFile] = useState<File>();
@@ -47,9 +40,14 @@ const NewProperty = () => {
             setErrMsg("Please enter the Property name.")
             return
         }
-        if (!formData.price) {
+        if (!formData.cost) {
             setShowErrModal(true)
             setErrMsg("Please enter the Property cost.")
+            return
+        }
+        if (!formData.details) {
+            setShowErrModal(true)
+            setErrMsg("Please enter the property details.")
             return
         }
         if (!formData.tags) {
@@ -62,7 +60,8 @@ const NewProperty = () => {
         const data = new FormData();
         data.append('file', file);
         data.append('name', formData.name);
-        data.append('cost', formData.price);
+        data.append('cost', formData.cost);
+        data.append('details', formData.details);
         data.append('categories', JSON.stringify(formData.tags));
 
 
@@ -155,86 +154,129 @@ const NewProperty = () => {
                                             value={formData.name}
                                         />
                                     </div>
-
                                     <div className="mb-4.5">
                                         <label className="mb-3 block text-sm font-medium text-black">
-                                            Property Cost
+                                            Property Details
                                         </label>
-                                        <input
-                                            type="number"
-                                            placeholder="Property Cost"
+                                        <textarea
+                                            placeholder="Property Details"
+                                            rows={10}
                                             className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter  "
                                             onChange={(e) => {
                                                 setFormData({
                                                     ...formData,
-                                                    price: e.target.value
+                                                    details: e.target.value
                                                 })
                                             }}
-                                            value={formData.price}
+                                            value={formData.details}
                                         />
-                                    </div>
-
-                                    <div className="mb-4.5">
-                                        <label className="mb-3 block text-sm font-medium text-black">
-                                            Property Category
-                                        </label>
-                                        <div className="w-full flex space-x-3">
-                                            <div>
-                                                <label
-                                                    htmlFor="house"
-                                                    className="flex cursor-pointer select-none items-center"
-                                                >
-                                                    <div className="relative">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="house"
-                                                            className="sr-only"
-                                                            value={'house'}
-                                                            onChange={(e) => {
-                                                                handleCategory(e.target.value)
-                                                            }}
-                                                        />
-                                                        <div
-                                                            className={`box mr-4 flex h-5 w-5 items-center justify-center rounded-full border border-primary 
-                                                                ${formData.tags?.includes('house') && "!border-4"
-                                                                }`}
-                                                        >
-                                                            <span className="h-2.5 w-2.5 rounded-full bg-white dark:bg-transparent"></span>
-                                                        </div>
-                                                    </div>
-                                                    House
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label
-                                                    htmlFor="checkboxLabelFive"
-                                                    className="flex cursor-pointer select-none items-center"
-                                                >
-                                                    <div className="relative">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="checkboxLabelFive"
-                                                            className="sr-only"
-                                                            value={'plot'}
-                                                            onChange={(e) => {
-                                                                handleCategory('plot')
-                                                            }}
-                                                        />
-                                                        <div
-                                                            className={`box mr-4 flex h-5 w-5 items-center justify-center rounded-full border border-primary ${formData.tags?.includes('plot') && "!border-4"
-                                                                }`}
-                                                        >
-                                                            <span className="h-2.5 w-2.5 rounded-full bg-white dark:bg-transparent"></span>
-                                                        </div>
-                                                    </div>
-                                                    Plot
-                                                </label>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="flex flex-col  w-[30%]">
+                                    <>
+                                        <div className="mb-4.5">
+                                            <label className="mb-3 block text-sm font-medium text-black">
+                                                Property Cost
+                                            </label>
+                                            <input
+                                                type="number"
+                                                placeholder="Property Cost"
+                                                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter  "
+                                                onChange={(e) => {
+                                                    setFormData({
+                                                        ...formData,
+                                                        cost: e.target.value
+                                                    })
+                                                }}
+                                                value={formData.cost}
+                                            />
+                                        </div>
+
+                                        <div className="mb-4.5">
+                                            <label className="mb-3 block text-sm font-medium text-black">
+                                                Property Category
+                                            </label>
+                                            <div className="w-full flex space-x-3">
+                                                <div>
+                                                    <label
+                                                        htmlFor="house"
+                                                        className="flex cursor-pointer select-none items-center"
+                                                    >
+                                                        <div className="relative">
+                                                            <input
+                                                                type="checkbox"
+                                                                id="house"
+                                                                className="sr-only"
+                                                                value={'house'}
+                                                                onChange={(e) => {
+                                                                    handleCategory(e.target.value)
+                                                                }}
+                                                            />
+                                                            <div
+                                                                className={`box mr-4 flex h-5 w-5 items-center justify-center rounded-full border border-primary 
+                                                                ${formData.tags?.includes('house') && "!border-4"
+                                                                    }`}
+                                                            >
+                                                                <span className="h-2.5 w-2.5 rounded-full bg-white dark:bg-transparent"></span>
+                                                            </div>
+                                                        </div>
+                                                        House
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        htmlFor="plot"
+                                                        className="flex cursor-pointer select-none items-center"
+                                                    >
+                                                        <div className="relative">
+                                                            <input
+                                                                type="checkbox"
+                                                                id="plot"
+                                                                className="sr-only"
+                                                                value={'plot'}
+                                                                onChange={(e) => {
+                                                                    handleCategory('plot')
+                                                                }}
+                                                            />
+                                                            <div
+                                                                className={`box mr-4 flex h-5 w-5 items-center justify-center rounded-full border border-primary ${formData.tags?.includes('plot') && "!border-4"
+                                                                    }`}
+                                                            >
+                                                                <span className="h-2.5 w-2.5 rounded-full bg-white dark:bg-transparent"></span>
+                                                            </div>
+                                                        </div>
+                                                        Plot
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        htmlFor="checkboxLabelFive"
+                                                        className="flex cursor-pointer select-none items-center"
+                                                    >
+                                                        <div className="relative">
+                                                            <input
+                                                                type="checkbox"
+                                                                id="checkboxLabelFive"
+                                                                className="sr-only"
+                                                                value={'estate'}
+                                                                onChange={(e) => {
+                                                                    handleCategory('estate')
+                                                                }}
+                                                            />
+                                                            <div
+                                                                className={`box mr-4 flex h-5 w-5 items-center justify-center rounded-full border border-primary ${formData.tags?.includes('estate') && "!border-4"
+                                                                    }`}
+                                                            >
+                                                                <span className="h-2.5 w-2.5 rounded-full bg-white dark:bg-transparent"></span>
+                                                            </div>
+                                                        </div>
+                                                        Estate
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
                                     <label className="mb-3 block text-sm font-medium text-black">
                                         Select Property image
                                     </label>

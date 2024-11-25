@@ -1,7 +1,14 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import NewProperty from "@/components/NewProperty/page";
+import { getProperties } from "@/app/actions/properties";
+import { PropertyProps } from "@/types/Properties";
+import { FaCircle } from "react-icons/fa";
+import moment from "moment";
 
-const DashboardAdmin = () => {
+const DashboardAdmin = async () => {
+    const res = await getProperties();
+    const properties: PropertyProps[] = res.propertysOBJ;
+    console.log("Properties => ", properties)
     return (
         <>
             <div className="bg-gray-100 w-full flex-1 p-6 md:mt-16  w-10rem">
@@ -20,47 +27,34 @@ const DashboardAdmin = () => {
                                     <th className="px-4 py-2 border-r">Name</th>
                                     <th className="px-4 py-2 border-r">Price</th>
                                     <th className="px-4 py-2">Created on</th>
-                                    <th className="px-4 py-2">Details</th>
+                                    <th className="px-4 py-2">categories</th>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-600">
 
-                                <tr>
-                                    <td className="border border-l-0 px-4 py-2 text-center text-green-500"><i className="fad fa-circle"></i></td>
-                                    <td className="border border-l-0 px-4 py-2">Lightning to USB-C Adapter Lightning.</td>
-                                    <td className="border border-l-0 px-4 py-2">$<span className="num-2"></span></td>
-                                    <td className="border border-l-0 border-r-0 px-4 py-2"><span className="num-2"></span> minutes ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="border border-l-0 px-4 py-2 text-center text-yellow-500"><i className="fad fa-circle"></i></td>
-                                    <td className="border border-l-0 px-4 py-2">Apple iPhone 8.</td>
-                                    <td className="border border-l-0 px-4 py-2">$<span className="num-2"></span></td>
-                                    <td className="border border-l-0 border-r-0 px-4 py-2"><span className="num-2"></span> minutes ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="border border-l-0 px-4 py-2 text-center text-green-500"><i className="fad fa-circle"></i></td>
-                                    <td className="border border-l-0 px-4 py-2">Apple MacBook Pro.</td>
-                                    <td className="border border-l-0 px-4 py-2">$<span className="num-2"></span></td>
-                                    <td className="border border-l-0 border-r-0 px-4 py-2"><span className="num-2"></span> minutes ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="border border-l-0 px-4 py-2 text-center text-red-500"><i className="fad fa-circle"></i></td>
-                                    <td className="border border-l-0 px-4 py-2">Samsung Galaxy S9.</td>
-                                    <td className="border border-l-0 px-4 py-2">$<span className="num-2"></span></td>
-                                    <td className="border border-l-0 border-r-0 px-4 py-2"><span className="num-2"></span> minutes ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="border border-l-0 px-4 py-2 text-center text-yellow-500"><i className="fad fa-circle"></i></td>
-                                    <td className="border border-l-0 px-4 py-2">Samsung Galaxy S8 256GB.</td>
-                                    <td className="border border-l-0 px-4 py-2">$<span className="num-2"></span></td>
-                                    <td className="border border-l-0 border-r-0 px-4 py-2"><span className="num-2"></span> minutes ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="border border-l-0 border-b-0 px-4 py-2 text-center text-green-500"><i className="fad fa-circle"></i></td>
-                                    <td className="border border-l-0 border-b-0 px-4 py-2">apple watch.</td>
-                                    <td className="border border-l-0 border-b-0 px-4 py-2">$<span className="num-2"></span></td>
-                                    <td className="border border-l-0 border-b-0 border-r-0 px-4 py-2"><span className="num-2"></span> minutes ago</td>
-                                </tr>
+                                {
+                                    properties.map((property, index) => (
+                                        <tr key={index}>
+                                            <td className="border border-l-0 px-4 py-2 text-center text-green-500">
+                                                <p>{index + 1}</p>
+                                            </td>
+                                            <td className="border border-l-0 px-4 py-2">{property.name}</td>
+                                            <td className="border border-l-0 px-4 py-2">$<span className="num-2">{property.cost}</span></td>
+                                            <td className="border border-l-0 border-r-0 px-4 py-2">
+                                                <span className="num-2"></span>
+                                                {moment(property.createdAt).calendar()}
+                                            </td>
+                                            <td className="border border-l-0 border-r-0 px-4 py-2">{
+                                                property.tags?.map((tag, index) => (
+                                                    <span key={index} className="num-2">{tag + ", "}</span>
+                                                ))}
+                                            </td>
+                                            <td className="border border-l-0 px-4 py-2">
+                                                <a href={`/admin/properties/${property._id}`} className="cursor-pointer text-center py-2 px-4 rounded-2xl bg-teal-500 text-white">VIEW</a>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
 
                             </tbody>
                         </table>
