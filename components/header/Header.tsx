@@ -1,9 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import Player from "../player/Player";
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const pages = ["home", "properties", "about", "contacts"];

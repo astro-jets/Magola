@@ -1,4 +1,5 @@
 import { getPropertyById } from "@/app/actions/properties";
+import PurchaseComponent from "@/components/purchase/Purchase";
 import { PropertyProps } from "@/types/Properties";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { BiSolidChevronRightCircle } from "react-icons/bi";
@@ -38,11 +39,7 @@ const SinglePropertyPage = async ({ params }: { params: Params }) => {
                             }
                         </div>
                     </div>
-                    <a className="bg-primary flex items-center justify-between w-3/4 mt-4 py-3 px-2 rounded-xl text-white"
-                        href={`/properties/${property._id}`} >
-                        <span>Purchase Property</span>
-                        <BiSolidChevronRightCircle size={30} color="#fff" />
-                    </a>
+                    <PurchaseComponent property={property} />
                 </div>
             </div>
         </div>

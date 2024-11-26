@@ -1,16 +1,16 @@
 "use server";
 
-export const newApplication = async (formData: {}): Promise<any> => {
+export const newPurchase = async (
+  userId: string,
+  propertyId: string
+): Promise<any> => {
   try {
-    const response = await fetch(
-      `${process.env.ROOT_LINK}/api/applications/new`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-        body: JSON.stringify(formData),
-      }
-    );
+    const response = await fetch(`${process.env.ROOT_LINK}/api/purchase/new`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+      body: JSON.stringify({ user: userId, property: propertyId }),
+    });
     const res = await response.json();
     return res;
   } catch (e) {

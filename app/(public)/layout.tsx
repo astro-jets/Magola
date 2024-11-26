@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { AudioContextProvider } from "@/context/AudioContext";
 import Header from "@/components/header/Header";
 import PrelineScript from "@/components/PrelineScript";
 import FooterComponent from "@/components/Footer/Footer";
+import AuthProvider from "../context/AuthProvider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -32,12 +32,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AudioContextProvider>
+        <AuthProvider>
+
           <Header />
           {children}
 
           <FooterComponent />
-        </AudioContextProvider>
+        </AuthProvider>
         <PrelineScript />
       </body>
     </html>
