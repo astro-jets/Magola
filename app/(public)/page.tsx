@@ -1,14 +1,18 @@
 import ContactsComponent from "@/components/Contacts/Contacts";
 import Services from "@/components/Properties/Properties";
 import Slider from "@/components/slider/Slider";
+import { getProperties } from "../actions/properties";
+import { PropertyProps } from "@/types/Properties";
 
-export default function Home() {
+export default async function Home() {
+  const res = await getProperties();
+  const properties: PropertyProps[] = res.propertysOBJ;
   return (
     <main id="content flex flex-col">
       <div className="w-full flex items-center justify-center">
         <Slider />
       </div>
-      <Services />
+      <Services title="Latest Listings" url="properties" properties={properties} />
 
       {/* Stats */}
       <div className="bg-neutral-900">

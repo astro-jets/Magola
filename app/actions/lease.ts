@@ -1,13 +1,13 @@
 "use server";
 
-export const newPurchase = async (
+export const newLease = async (
   propertyId: string,
   userId: string
 ): Promise<any> => {
   try {
-    const response = await fetch(`${process.env.ROOT_LINK}/api/purchase/new`, {
+    const response = await fetch(`${process.env.ROOT_LINK}/api/lease/new`, {
       method: "POST",
-      headers: { "Content-Type": "purchase/json" },
+      headers: { "Content-Type": "lease/json" },
       cache: "no-store",
       body: JSON.stringify({ user: userId, property: propertyId }),
     });
@@ -18,9 +18,9 @@ export const newPurchase = async (
   }
 };
 
-export const getPurchases = async (): Promise<any> => {
+export const getLeases = async (): Promise<any> => {
   try {
-    const response = await fetch(`${process.env.ROOT_LINK}/api/purchase/all`, {
+    const response = await fetch(`${process.env.ROOT_LINK}/api/lease/all`, {
       next: { revalidate: 0 },
     });
     const res = await response.json();
@@ -30,10 +30,10 @@ export const getPurchases = async (): Promise<any> => {
   }
 };
 
-export const getPurchaseByID = async (id: string): Promise<any> => {
+export const getLeaseByID = async (id: string): Promise<any> => {
   try {
     const response = await fetch(
-      `${process.env.ROOT_LINK}/api/purchase/single/?id=${id}`,
+      `${process.env.ROOT_LINK}/api/lease/single/?id=${id}`,
       {
         next: { revalidate: 0 },
       }
@@ -45,10 +45,10 @@ export const getPurchaseByID = async (id: string): Promise<any> => {
   }
 };
 
-export const getPurchaseByUser = async (id: string): Promise<any> => {
+export const getLeaseByUser = async (id: string): Promise<any> => {
   try {
     const response = await fetch(
-      `${process.env.ROOT_LINK}/api/purchase/user?user=${id}`,
+      `${process.env.ROOT_LINK}/api/lease/user?user=${id}`,
       {
         next: { revalidate: 0 },
       }

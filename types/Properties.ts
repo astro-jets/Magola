@@ -10,4 +10,5 @@ export type PropertyProps = {
   details: string;
   tags?: string[];
   user?: userProps;
+  status?: string;
 };

@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/db";
 import Property from "@/models/Property";
-import Purchase from "@/models/Purchase";
+import Lease from "@/models/Lease";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -20,13 +20,13 @@ export async function POST(req: Request) {
     }
 
     // Save property to the database
-    const newPurchase = new Purchase({ user, property });
+    const newLease = new Lease({ user, property });
 
-    console.log("New property => ", newPurchase);
+    console.log("New lease => ", newLease);
 
-    const purchaseReq = await newPurchase.save();
+    const lease = await newLease.save();
 
-    if (!purchaseReq) {
+    if (!lease) {
       return NextResponse.json(
         {
           status: false,
@@ -47,8 +47,8 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           status: true,
-          message: "Purchase successfully created!",
-          data: purchaseReq,
+          message: "Lease successfully created!",
+          lease,
         },
         { status: 201 }
       );

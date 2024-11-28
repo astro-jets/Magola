@@ -1,5 +1,5 @@
 import { PropertyProps } from "@/types/Properties";
-const SingleProperty = ({ property }: { property: PropertyProps }) => {
+const SingleProperty = ({ property, url }: { url: string; property: PropertyProps }) => {
     return (
         < div className="h-[26rem] pb-2 flex flex-col focus:outline-none">
             <div className=" max-h-60  h-60 overflow-hidden bg-gray-100 rounded-2xl dark:bg-neutral-800">
@@ -27,7 +27,7 @@ const SingleProperty = ({ property }: { property: PropertyProps }) => {
                 </div>
             </div>
             <a className="bg-primary w-3/4 mt-4 py-3 px-2 rounded-xl text-white"
-                href={`/properties/${property._id}`} >View Property</a>
+                href={`/${url + '/' + property._id}`} >View Property</a>
         </div>
     );
 }

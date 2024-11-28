@@ -7,6 +7,7 @@ const PropertySchema = new Schema(
     details: { type: String, required: true },
     path: { type: String, required: true },
     tags: { type: [String], default: [] },
+    status: { type: String, default: "sale" },
   },
   { timestamps: true }
 );

@@ -27,8 +27,10 @@ export default function RootLayout({
             {/* <Navbar /> */}
             <div className="min-h-screen w-full overflow-hidden flex flex-row justify-between">
               <Sidebar />
-              <Header />
-              {children}
+              <div className="w-[85%] flex flex-col">
+                <Header />
+                {children}
+              </div>
             </div>
           </main>
         </AuthProvider>

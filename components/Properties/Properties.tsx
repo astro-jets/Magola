@@ -2,11 +2,7 @@ import { getProperties } from "@/app/actions/properties";
 import { PropertyProps } from "@/types/Properties";
 import SingleProperty from "./SingleProperty";
 
-const Properties = async () => {
-
-    const res = await getProperties();
-    const properties: PropertyProps[] = res.propertysOBJ;
-
+const Properties = async ({ properties, title, url }: { title: string; url: string; properties: PropertyProps[] }) => {
     return (
         <>
 
@@ -14,7 +10,7 @@ const Properties = async () => {
             <div className="max-w-7xl px-4 lg:px-6 py-12 mx-auto">
                 <div className="mb-6 sm:mb-10 max-w-2xl text-center mx-auto">
                     <h1 className="font-medium text-black text-2xl sm:text-4xl dark:text-white">
-                        Latest Listings
+                        {title}
                     </h1>
                 </div>
 
@@ -22,7 +18,7 @@ const Properties = async () => {
                 <div className=" grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
                     {
                         properties?.map((property, index) => (
-                            <SingleProperty key={index} property={property} />
+                            <SingleProperty url={url} key={index} property={property} />
                         ))
                     }
                 </div>
