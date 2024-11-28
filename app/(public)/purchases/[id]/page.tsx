@@ -9,7 +9,7 @@ import { FaScaleUnbalanced } from "react-icons/fa6";
 
 const SinglePropertyPage = async ({ params }: { params: Params }) => {
     const res = await getPropertyById(params.id);
-    const property: PropertyProps = res.property;
+    const property: PropertyProps = res?.property;
     return (
         <div className="w-full flex items-center justify-center p-8">
             <div className="w-3/4">

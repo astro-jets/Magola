@@ -6,13 +6,13 @@ import { PropertyProps } from "@/types/Properties";
 
 export default async function Home() {
   const res = await getProperties();
-  const properties: PropertyProps[] = res.propertysOBJ;
+  const properties: PropertyProps[] = res?.propertysOBJ;
   return (
     <main id="content flex flex-col">
       <div className="w-full flex items-center justify-center">
         <Slider />
       </div>
-      <Services title="Latest Listings" url="properties" properties={properties} />
+      {properties && <Services title="Latest Listings" url="properties" properties={properties} />}
 
       {/* Stats */}
       <div className="bg-neutral-900">
