@@ -18,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Star E",
+  title: "Arnold Homes",
   description: "Hybrid",
 };
 

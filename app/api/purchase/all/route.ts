@@ -9,56 +9,36 @@ export async function GET(req: Request) {
   try {
     await dbConnect();
 
-    const propertiesReq = await Property.find();
-    if (!propertiesReq) {
+    const purchasesReq = await Purchase.find();
+    if (!purchasesReq) {
       return NextResponse.json(
         {
           status: false,
-          message: "No propertiesReq found.",
+          message: "No purchasesReq found.",
         },
         { status: 500 }
       );
     }
 
-    const propertysOBJ = [];
+    const purchases = [];
 
-    const trimStory = async (details: String) => {
-      const words = details.split(" ");
-      const trimmedWords = words.slice(0, 8);
-      const trimmedParagraph = trimmedWords.join(" ");
-      return trimmedParagraph;
-    };
+    for (const purchase of purchasesReq) {
+      // Get the user and the property
+      const property = await Property.findById(purchase.property);
+      const user = await User.findById(purchase.user);
 
-    for (const property of propertiesReq) {
-      // Convert image for each property
-      const details = await trimStory(property.details);
-      // Create an object for each property with converted image
-      const convertedproperty = {
-        ...property.toObject(),
-        details: details,
+      // Create an object for each purchase with converted image
+      const convertedpurchase = {
+        createdAt: purchase.createdAt,
+        user,
+        property,
       };
 
-      // Add the converted property to the array
-      propertysOBJ.push(convertedproperty);
+      // Add the converted purchase to the array
+      purchases.push(convertedpurchase);
     }
 
-    // if (propertiesReq) {
-    //   const propertys = [];
-    //   for (let i = 0; i < propertiesReq.length; i++) {
-    //     const property = propertiesReq[i];
-    //     const assignment = await Purchase.findOne({ property: property._id });
-    //     const user = assignment
-    //       ? await User.findById(assignment.user)
-    //       : undefined;
-    //     propertys.push({
-    //       ...property.toObject(),
-    //       user,
-    //     });
-    //   }
-    //   // console.log("Propertys => ", propertys);
-    //   return NextResponse.json({ propertys }, { status: 201 });
-    // }
-    return NextResponse.json({ propertysOBJ });
+    return NextResponse.json({ purchases });
   } catch (error) {
     console.log("Zakanika => ", error);
     return NextResponse.json({

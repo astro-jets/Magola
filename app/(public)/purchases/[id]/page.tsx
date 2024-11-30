@@ -1,11 +1,7 @@
 import { getPropertyById } from "@/app/actions/properties";
 import PurchaseOptions from "@/components/purchase/Actions";
-import PurchaseComponent from "@/components/purchase/Purchase";
 import { PropertyProps } from "@/types/Properties";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { BiSolidChevronRightCircle } from "react-icons/bi";
-import { BsMegaphone } from "react-icons/bs";
-import { FaScaleUnbalanced } from "react-icons/fa6";
 
 const SinglePropertyPage = async ({ params }: { params: Params }) => {
     const res = await getPropertyById(params.id);
@@ -42,7 +38,7 @@ const SinglePropertyPage = async ({ params }: { params: Params }) => {
                             }
                         </div>
                     </div>
-                    <PurchaseOptions />
+                    <PurchaseOptions property={property} />
                 </div>
             </div>
         </div>

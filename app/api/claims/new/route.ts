@@ -1,15 +1,17 @@
 import dbConnect from "@/lib/db";
+import Claim from "@/models/Claim";
+import Notification from "@/models/Notification";
 import Property from "@/models/Property";
-import Purchase from "@/models/Purchase";
+import User from "@/models/User";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     await dbConnect();
-    const { user, property } = await req.json();
+    const { user, property, message } = await req.json();
 
     // Validate required fields
-    if (!user || !property) {
+    if (!user || !property || !message) {
       return NextResponse.json(
         {
           status: false,
@@ -20,41 +22,44 @@ export async function POST(req: Request) {
     }
 
     // Save property to the database
-    const newPurchase = new Purchase({ user, property });
+    const newClaim = new Claim({ user, property, message });
 
-    console.log("New property => ", newPurchase);
+    console.log("New Claim => ", newClaim);
 
-    const purchaseReq = await newPurchase.save();
+    const claimReq = await newClaim.save();
 
-    if (!purchaseReq) {
+    if (!claimReq) {
       return NextResponse.json(
         {
           status: false,
-          message: "Failed to save the property.",
+          message: "Failed to save the claim.",
         },
         { status: 500 }
       );
     }
+    const userReq = await User.findById(user);
+    const propertyReq = await Property.findById(property);
+    // Save property to the database
 
-    // Update Property Status
-    const updatedData = { $set: { status: "sold" } };
-    const propertyUpdate = await Property.findOneAndUpdate(
-      { _id: property },
-      updatedData
+    const notification = new Notification({
+      by: user,
+      title: "New Complaint",
+      for: "admin",
+      property: property,
+      message: `${userReq.name} filed a complaint on ${propertyReq.name}. `,
+    });
+    await notification.save();
+
+    return NextResponse.json(
+      {
+        status: true,
+        message: "Claim successfully created!",
+        data: claimReq,
+      },
+      { status: 201 }
     );
-
-    if (propertyUpdate) {
-      return NextResponse.json(
-        {
-          status: true,
-          message: "Purchase successfully created!",
-          data: purchaseReq,
-        },
-        { status: 201 }
-      );
-    }
   } catch (error) {
-    console.error("Error creating property:", error);
+    console.error("Error creating claim: ", error);
     return NextResponse.json(
       {
         status: false,

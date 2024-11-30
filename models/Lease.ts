@@ -10,8 +10,8 @@ const LeaseSchema = new Schema(
     purchase: {
       type: String,
     },
-    status: {
-      type: String,
+    ammount: {
+      type: Number,
       default: "pending",
     },
   },

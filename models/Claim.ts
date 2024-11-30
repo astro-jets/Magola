@@ -7,7 +7,7 @@ const ClaimSchema = new Schema(
     user: {
       type: String,
     },
-    purchase: {
+    property: {
       type: String,
     },
     message: {

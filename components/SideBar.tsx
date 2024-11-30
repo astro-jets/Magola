@@ -29,11 +29,6 @@ const links: linksType = [
         logo: <BsPiggyBank size={20} color="gray" />,
     },
     {
-        name: "Notifications",
-        url: "/admin/notifications",
-        logo: <BsBell size={20} color="gray" />,
-    },
-    {
         name: "Claims",
         url: "/admin/claims",
         logo: <FaHands size={20} color="gray" />,
@@ -47,11 +42,6 @@ const links: linksType = [
         name: "Reports",
         url: "/admin/reports",
         logo: <BsPieChart size={20} color="gray" />,
-    },
-    {
-        name: "Log Out",
-        url: "/logout",
-        logo: <BsDoorOpen size={20} color="gray" />,
     },
 ];
 

@@ -2,14 +2,15 @@
 
 export const newLease = async (
   propertyId: string,
-  userId: string
+  userId: string,
+  ammount: number
 ): Promise<any> => {
   try {
     const response = await fetch(`${process.env.ROOT_LINK}/api/lease/new`, {
       method: "POST",
-      headers: { "Content-Type": "lease/json" },
+      headers: { "Content-Type": "application/json" },
       cache: "no-store",
-      body: JSON.stringify({ user: userId, property: propertyId }),
+      body: JSON.stringify({ user: userId, property: propertyId, ammount }),
     });
     const res = await response.json();
     return res;
