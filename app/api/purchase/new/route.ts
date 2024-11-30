@@ -1,6 +1,8 @@
 import dbConnect from "@/lib/db";
+import Notification from "@/models/Notification";
 import Property from "@/models/Property";
 import Purchase from "@/models/Purchase";
+import User from "@/models/User";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -44,6 +46,17 @@ export async function POST(req: Request) {
     );
 
     if (propertyUpdate) {
+      const userReq = await User.findById(user);
+      const propertyReq = await Property.findById(property);
+
+      const notification = new Notification({
+        by: user,
+        title: "Property Purchase",
+        for: "admin",
+        property: property,
+        message: `Property Purchase for ${propertyReq.name}, by ${userReq.name}.`,
+      });
+      await notification.save();
       return NextResponse.json(
         {
           status: true,

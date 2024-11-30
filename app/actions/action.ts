@@ -3,9 +3,7 @@
 // Admin Actions
 export const getAdminStats = async (): Promise<any> => {
   try {
-    const response = await fetch(
-      `${process.env.ROOT_LINK}/api/actions/adminStats/`
-    );
+    const response = await fetch(`${process.env.ROOT_LINK}/api/admin/stats/`);
     if (!response) {
       return "Couldnt find stats";
     }
@@ -34,7 +32,7 @@ export const getExpiryReports = async (): Promise<any> => {
 export const getReports = async (): Promise<any> => {
   try {
     const response = await fetch(
-      `${process.env.ROOT_LINK}/api/actions/charts/assets`
+      `${process.env.ROOT_LINK}/api/admin/charts/properties`
     );
     if (!response) {
       return "Couldnt find reports";
