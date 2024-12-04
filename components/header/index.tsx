@@ -1,12 +1,15 @@
-"use client"
+
 import Link from "next/link";
 
 import Image from "next/image";
 import DropdownNotification from "./DropdownNotification";
 import DropdownMessage from "./DropdownMessage";
 import DropdownUser from "./DropdownUser";
+import { getAdminNotifications } from "@/app/actions/action";
 
-const Header = () => {
+const Header = async () => {
+  const res = await getAdminNotifications();
+  console.log("REs => ", res)
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 ">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
