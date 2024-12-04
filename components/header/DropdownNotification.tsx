@@ -2,8 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { notificationProps } from "@/types/notification";
+import moment from "moment";
 
-const DropdownNotification = ({ notifications }: { notifications: notificationProps[] }) => {
+const DropdownNotification = ({ notifications }: { notifications: notificationProps }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
 
@@ -81,7 +82,17 @@ const DropdownNotification = ({ notifications }: { notifications: notificationPr
 
         <ul className="flex h-auto flex-col overflow-y-auto">
           {
-            // notifications.map((n,index))
+            notifications.map(n => (
+              <>
+                <li >
+                  <span className="text-black ">{n.title}</span>
+                  <p className="text-sm">
+                    {n.message}
+                  </p>
+                  <p className="text-xs">{moment(n.createdAt).calendar()}</p>
+                </li>
+              </>
+            ))
           }
         </ul>
       </div>
