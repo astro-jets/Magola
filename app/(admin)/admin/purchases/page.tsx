@@ -32,12 +32,12 @@ const DashboardAdmin = async () => {
                                     purchases.map((purchase, index) => (
                                         <tr key={index}>
                                             <td className="border border-l-0 px-4 py-2 text-center text-green-500">{index + 1}</td>
-                                            <td className="border border-l-0 px-4 py-2">{purchase.property.name}</td>
-                                            <td className="border border-l-0 px-4 py-2">{purchase.property.cost}</td>
+                                            <td className="border border-l-0 px-4 py-2">{purchase.property?.name}</td>
+                                            <td className="border border-l-0 px-4 py-2">{purchase.property?.cost}</td>
                                             <td className="border border-l-0 px-4 py-2">{purchase.user.name}</td>
                                             <td className="border border-l-0 px-4 py-2">{moment(purchase.createdAt).calendar()}</td>
                                             <td className="border border-l-0 px-4 py-2">
-                                                <a className="bg-teal-500 text-white p-2 rounded-xl" href={`/admin/properties/${purchase.property._id}`}>View property</a>
+                                                <a className="bg-teal-500 text-white p-2 rounded-xl" href={`/admin/properties/${purchase.property?._id}`}>View property</a>
                                             </td>
                                         </tr>
                                     ))

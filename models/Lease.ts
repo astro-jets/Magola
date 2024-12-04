@@ -7,7 +7,7 @@ const LeaseSchema = new Schema(
     user: {
       type: String,
     },
-    purchase: {
+    property: {
       type: String,
     },
     ammount: {

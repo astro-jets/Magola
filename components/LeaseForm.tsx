@@ -25,7 +25,8 @@ const LeaseForm = ({ property, onClose }: { property: PropertyProps, onClose: ()
 
     const subscribe = async () => {
         setIsLoading(true)
-        const res = await newLease(property._id!, session?.user.id, (parseInt(property.cost) * 0.1))
+        if (!property._id) { return }
+        const res = await newLease(property._id, session?.user.id, (parseInt(property.cost) * 0.1))
         if (res) {
             setSuccess(true)
             setIsLoading(false)
