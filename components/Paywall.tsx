@@ -71,7 +71,7 @@ const Paywall = ({ property, onClose }: { property: PropertyProps, onClose: () =
                                                                 <path fill="#efc75e" d="M51.916 111.982c-1.787-6.948-7.486-11.634-15.226-11.734H.374L0 101.934c28.329 6.984 52.107 28.474 59.821 48.688l-7.905-38.64z" data-original="#efc75e" />
                                                             </svg>
                                                             <input type="number" placeholder="Card Number"
-                                                                className="px-4 py-3.5 bg-white text-white w-full text-sm outline-none" />
+                                                                className="px-4 py-3.5 bg-white text-black w-full text-sm outline-none" />
                                                         </div>
                                                         <div className="grid grid-cols-2 gap-6">
                                                             <input type="number" placeholder="EXP."
