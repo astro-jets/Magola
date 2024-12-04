@@ -10,7 +10,7 @@ const DashboardAdmin = async () => {
     return (
         <>
             <div className="bg-gray-100 w-full flex-1 p-6 md:mt-16  w-10rem">
-                <Breadcrumb pageName="Purchases" />
+                <Breadcrumb pageName="Leases" />
                 <div className=" mt-6 ">
                     <div className="card col-span-2 xl:col-span-1">
                         <div className="card-header">Recent Leases</div>
