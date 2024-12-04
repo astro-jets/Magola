@@ -20,7 +20,7 @@ const NavComponent = ({ notifications }: { notifications: notificationProps }) =
             <nav className="max-w-[85rem] flex justify-between space-x-20 w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
                 <div className="flex items-center justify-between min-w-40">
                     <a className="inline-flex items-center gap-x-2 text-2xl font-semibold text-white" href="#">
-                        Report It
+                        Arnold Homes
                         <BsMegaphone color="#fff" size={30} />
                     </a>
                     <div className="sm:hidden">

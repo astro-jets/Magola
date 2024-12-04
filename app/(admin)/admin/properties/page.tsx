@@ -49,7 +49,7 @@ const DashboardAdmin = async () => {
                                                     <span key={index} className="num-2">{tag + ", "}</span>
                                                 ))}
                                             </td>
-                                            {property.status === 'sale' &&
+                                            {
                                                 <td className="border border-l-0 px-4 py-2">
                                                     <a href={`/admin/properties/${property._id}`} className="cursor-pointer text-center py-2 px-4 rounded-2xl bg-teal-500 text-white">VIEW</a>
                                                 </td>

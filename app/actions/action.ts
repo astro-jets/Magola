@@ -106,7 +106,7 @@ export const getNotifications = async (user: string): Promise<any> => {
 export const getAdminNotifications = async (): Promise<any> => {
   try {
     const response = await fetch(
-      `${process.env.ROOT_LINK}/api/actions/notifications/?user=admin`
+      `${process.env.ROOT_LINK}/api/admin/notifications/`
     );
     if (!response) {
       return "Couldnt find stats";

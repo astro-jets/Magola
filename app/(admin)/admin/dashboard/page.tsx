@@ -1,4 +1,4 @@
-import { getAdminStats, getReports } from "@/app/actions/action";
+import { getAdminNotifications, getAdminStats, getReports } from "@/app/actions/action";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 
 import ChartThree from "@/components/Charts/ChartThree";
@@ -12,7 +12,8 @@ const DashboardAdmin = async () => {
     const stats = res.stats;
     const res2 = await getReports();
     const properties = res2.monthly;
-    // console.log(reports)
+    const res3 = await getAdminNotifications();
+    console.log("Notifications => ", res3)
     return (
         <>
             <div className=" self-end overflow-hidden w-full p-6 md:mt-16">

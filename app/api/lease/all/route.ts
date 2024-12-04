@@ -42,22 +42,6 @@ export async function GET(req: Request) {
       propertysOBJ.push(convertedproperty);
     }
 
-    // if (propertiesReq) {
-    //   const propertys = [];
-    //   for (let i = 0; i < propertiesReq.length; i++) {
-    //     const property = propertiesReq[i];
-    //     const assignment = await Purchase.findOne({ property: property._id });
-    //     const user = assignment
-    //       ? await User.findById(assignment.user)
-    //       : undefined;
-    //     propertys.push({
-    //       ...property.toObject(),
-    //       user,
-    //     });
-    //   }
-    //   // console.log("Propertys => ", propertys);
-    //   return NextResponse.json({ propertys }, { status: 201 });
-    // }
     return NextResponse.json({ propertysOBJ });
   } catch (error) {
     console.log("Zakanika => ", error);

@@ -1,9 +1,9 @@
 import dbConnect from "@/lib/db";
 import Property from "@/models/Property";
 import Lease from "@/models/Lease";
-import { NextResponse } from "next/server";
-import Notification from "@/models/Notification";
 import User from "@/models/User";
+import { createNotification } from "@/lib/notification";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
@@ -20,33 +20,38 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    // Fetch related user and property
     const userReq = await User.findById(user);
     const propertyReq = await Property.findById(property);
-    // Save property to the database
+
+    // Save lease to the database
     const newLease = new Lease({ user, property, ammount });
-
-    console.log("New lease => ", newLease);
-
     const lease = await newLease.save();
 
     if (!lease) {
       return NextResponse.json(
         {
           status: false,
-          message: "Failed to save the property.",
+          message: "Failed to save the lease.",
         },
         { status: 500 }
       );
     }
 
-    const notification = new Notification({
+    // Generate a notification for the admin
+    const notificationResult = await createNotification({
       by: user,
       title: "Lease Payment",
-      for: "admin",
+      forTarget: "admin",
       property: property,
-      message: `Lease payment for ${propertyReq.name}, by ${userReq.name}. Ammount is ${ammount}`,
+      message: `Lease payment for ${propertyReq.name}, by ${userReq.name}. Amount is ${ammount}`,
     });
-    await notification.save();
+
+    if (!notificationResult.status) {
+      console.error("Notification creation failed:", notificationResult.error);
+    }
+
     return NextResponse.json(
       {
         status: true,
@@ -56,7 +61,7 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating property:", error);
+    console.error("Error creating lease:", error);
     return NextResponse.json(
       {
         status: false,

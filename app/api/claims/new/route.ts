@@ -1,8 +1,8 @@
 import dbConnect from "@/lib/db";
 import Claim from "@/models/Claim";
-import Notification from "@/models/Notification";
 import Property from "@/models/Property";
 import User from "@/models/User";
+import { createNotification } from "@/lib/notification";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -21,11 +21,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // Save property to the database
+    // Save claim to the database
     const newClaim = new Claim({ user, property, message });
-
-    console.log("New Claim => ", newClaim);
-
     const claimReq = await newClaim.save();
 
     if (!claimReq) {
@@ -37,18 +34,22 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
+
     const userReq = await User.findById(user);
     const propertyReq = await Property.findById(property);
-    // Save property to the database
 
-    const notification = new Notification({
+    // Generate a notification for the admin
+    const notificationResult = await createNotification({
       by: user,
       title: "New Complaint",
-      for: "admin",
+      forTarget: "admin",
       property: property,
-      message: `${userReq.name} filed a complaint on ${propertyReq.name}. `,
+      message: `${userReq.name} filed a complaint on ${propertyReq.name}.`,
     });
-    await notification.save();
+
+    if (!notificationResult.status) {
+      console.error("Notification creation failed:", notificationResult.error);
+    }
 
     return NextResponse.json(
       {
